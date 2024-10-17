@@ -1,3 +1,1 @@
-export const hello = (): string => {
-	return "hello";
-};
+export * from "./SFormat";

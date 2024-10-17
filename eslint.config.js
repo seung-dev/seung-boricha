@@ -1,28 +1,60 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import tsEslint from "typescript-eslint";
+import jsEslint from "@eslint/js";
+// import { FlatCompat } from "@eslint/eslintrc";
+import eslintPluginJsxA11y from "eslint-plugin-jsx-a11y";
 
-export default tseslint.config(
-  { ignores: ['dist'] },
-  {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-    },
-  },
-)
+import globals from "globals";
+import eslintPluginReact from "eslint-plugin-react";
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import eslintPluginReactRefresh from "eslint-plugin-react-refresh";
+
+import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
+
+// const compat = new FlatCompat();
+
+export default tsEslint.config(
+	{ ignores: ["dist", ".prettierrc.cjs"] },
+	/* react */
+	jsEslint.configs.recommended,
+	// ...compat.extends("eslint-config-standard"),
+	eslintPluginJsxA11y.flatConfigs.recommended,
+	/* typescript */
+	...tsEslint.configs.strictTypeChecked,
+	...tsEslint.configs.stylisticTypeChecked,
+	/* prettier */
+	eslintPluginPrettier,
+	/* app */
+	{
+		languageOptions: {
+			parserOptions: {
+				ecmaFeatures: { jsx: true },
+				tsconfigRootDir: import.meta.dirname,
+				project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+				globals: { ...globals.browser },
+			},
+		},
+	},
+	{
+		settings: { react: { version: "detect" } },
+		files: ["./src/**/*.{js,cjs,mjs,jsx,mjsx,ts,tsx,mtsx}"],
+		plugins: {
+			react: eslintPluginReact,
+			"react-hooks": eslintPluginReactHooks,
+			"react-refresh": eslintPluginReactRefresh,
+		},
+		rules: {
+			...eslintPluginReact.configs.recommended.rules,
+			...eslintPluginReact.configs["jsx-runtime"].rules,
+			...eslintPluginReactHooks.configs.recommended.rules,
+			"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+			"@typescript-eslint/no-unused-vars": "warn",
+			camelcase: "off",
+			"prettier/prettier": "warn",
+		},
+	},
+	/* disable */
+	{
+		files: ["**/*.{js,cjs,mjs,jsx,mjsx}", "vite.config.ts"],
+		extends: [tsEslint.configs.disableTypeChecked],
+	},
+);

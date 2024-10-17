@@ -1,0 +1,1 @@
+export { SHello } from "./view";

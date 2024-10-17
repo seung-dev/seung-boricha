@@ -136,3 +136,7 @@ Edit Files
 Add Files
 - .prettierignore
 - .prettierrc.cjs
+
+```cmd
+npm install --save-dev @types/node
+```

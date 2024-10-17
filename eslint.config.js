@@ -35,7 +35,10 @@ export default tsEslint.config(
 		},
 	},
 	{
-		settings: { react: { version: "detect" } },
+		settings: {
+			react: { version: "detect" },
+			"import/resolver": { alias: { map: [["@", "src"]], extensions: [".js", ".jsx", ".ts", ".tsx"] } },
+		},
 		files: ["./src/**/*.{js,cjs,mjs,jsx,mjsx,ts,tsx,mtsx}"],
 		plugins: {
 			react: eslintPluginReact,
@@ -49,7 +52,7 @@ export default tsEslint.config(
 			"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
 			"@typescript-eslint/no-unused-vars": "warn",
 			camelcase: "off",
-			"prettier/prettier": "warn",
+			"prettier/prettier": ["error", { endeOfLine: "auto" }],
 		},
 	},
 	/* disable */

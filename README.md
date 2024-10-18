@@ -1,5 +1,21 @@
 # seung-boricha
 
+### Installation
+
+```cmd
+npm install seung
+```
+
+### NPM Publish
+
+```cmd
+npm login
+```
+
+```cmd
+npm publish
+```
+
 ### Logs
 
 ##### Create Vite App
@@ -110,4 +126,18 @@ Edit Files
 
 ```cmd
 npm install --save-dev vite-plugin-dts
+```
+
+##### Add Huskey
+
+Edit Files
+- package.json
+- .husky/pre-commit
+
+```cmd
+npm install --save-dev husky
+```
+
+```cmd
+npx husky init
 ```

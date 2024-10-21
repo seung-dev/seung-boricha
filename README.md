@@ -127,17 +127,3 @@ Edit Files
 ```cmd
 npm install --save-dev vite-plugin-dts
 ```
-
-##### Add Huskey
-
-Edit Files
-- package.json
-- .husky/pre-commit
-
-```cmd
-npm install --save-dev husky
-```
-
-```cmd
-npx husky init
-```

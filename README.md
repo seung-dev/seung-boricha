@@ -6,14 +6,14 @@
 npm install seung
 ```
 
-### NPM Publish
+### Dependencies
+
+##### SSecurity
 
 ```cmd
-npm login
-```
-
-```cmd
-npm publish
+"peerDependencies": {
+  "crypto-js": "^4.0.0",
+},
 ```
 
 ### Logs
@@ -126,4 +126,14 @@ Edit Files
 
 ```cmd
 npm install --save-dev vite-plugin-dts
+```
+
+##### Add Peer Dependencies
+
+```cmd
+npm install crypto-js
+```
+
+```cmd
+npm install --save-dev @types/crypto-js
 ```
